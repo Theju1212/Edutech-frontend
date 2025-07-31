@@ -11,7 +11,7 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/admin/login', { email, key });
+      const res = await axios.post('https://edutech-backend-6mkz.onrender.com/api/admin/login', { email, key });
       if (res.data.success) {
         localStorage.setItem('user', JSON.stringify({ email })); // 👈 Mark admin as logged in
         navigate('/admin-dashboard');

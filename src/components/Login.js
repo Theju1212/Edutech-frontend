@@ -11,7 +11,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5000/api/login', { email, password });
+      const res = await axios.post('https://edutech-backend-6mkz.onrender.com/api/login', { email, password });
 
       if (res.data.success) {
         // ✅ Store user info in localStorage
