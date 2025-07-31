@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AdminDashboard.css';
-import { useCourseList } from '../context/CourseListContext';
+import { useCourseContext } from '../context/CourseContext';
 
 const AdminDashboard = () => {
   const [title, setTitle] = useState('');
@@ -8,7 +8,7 @@ const AdminDashboard = () => {
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
   const [editIndex, setEditIndex] = useState(null);
-  const { courses, setCourses } = useCourseList();
+  const { courses, setCourses } = useCourseContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
