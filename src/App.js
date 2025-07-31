@@ -18,7 +18,7 @@ import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
-   
+    <Router >
 
 
       <div className="App">
@@ -40,7 +40,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    
+    </Router>
   );
 }
 
