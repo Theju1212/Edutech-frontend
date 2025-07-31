@@ -1,0 +1,65 @@
+/* Fullscreen layout */
+.admin-login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Form styling */
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+}
+
+.admin-login-form h2 {
+  font-size: 2.2rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+/* Input fields */
+.admin-login-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #2d3e50;
+  color: white;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.admin-login-form input::placeholder {
+  color: #ccc;
+}
+
+.admin-login-form input:focus {
+  background-color: #3b4e63;
+}
+
+/* Button */
+.admin-login-form button {
+  padding: 0.75rem 1.5rem;
+  background-color: #22c55e;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.admin-login-form button:hover {
+  background-color: #16a34a;
+  transform: scale(1.03);
+}

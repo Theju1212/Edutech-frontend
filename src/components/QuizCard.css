@@ -1,0 +1,102 @@
+/* src/styles/quiz.css */
+
+.quiz-card {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 2rem auto;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.quiz-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.opt-btn {
+  padding: .8rem 1rem;
+  background: #14b89f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.opt-btn:hover {
+  background: #0da78e;
+}
+
+.opt-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.correct {
+  background: #10b981 !important;
+}
+
+.wrong {
+  background: #ef4444 !important;
+}
+
+.quiz-card button {
+  margin-top: 1.5rem;
+  padding: .8rem 1.2rem;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* ✅ Responsive design */
+@media (max-width: 768px) {
+  .quiz-card {
+    padding: 1.2rem;
+  }
+
+  .options {
+    grid-template-columns: 1fr; /* Stack vertically on small screens */
+  }
+
+  .opt-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem 0.9rem;
+  }
+
+  .quiz-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz-card {
+    margin: 1rem 0.5rem;
+  }
+
+  .opt-btn {
+    font-size: 0.9rem;
+  }
+
+  .quiz-card h2 {
+    font-size: 1.1rem;
+  }
+}

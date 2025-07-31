@@ -1,0 +1,120 @@
+.quiz-page-container {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.quiz-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #3b82f6;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  justify-items: center;
+}
+
+.course-grid button {
+  background-color: #00b894;
+  color: white;
+  border: none;
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 255, 204, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.course-grid button:hover {
+  background-color: #26de81;
+  transform: scale(1.05);
+}
+
+.quiz-card-section {
+  max-width: 900px;
+  margin: auto;
+}
+
+.quiz-card {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 2rem auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.quiz-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.opt-btn {
+  padding: .8rem 1rem;
+  background: #14b89f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .course-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .quiz-title {
+    font-size: 2rem;
+  }
+
+  .opt-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .quiz-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .quiz-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-title {
+    font-size: 1.6rem;
+  }
+
+  .opt-btn {
+    font-size: 0.9rem;
+  }
+
+  .quiz-card {
+    padding: 1rem;
+  }
+
+  .options {
+    grid-template-columns: 1fr;
+  }
+}
