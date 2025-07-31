@@ -1,95 +1,99 @@
-// src/components/AdminDashboard.js
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./AdminDashboard.css";
-import { useCourseContext } from "../context/CourseContext";
-
+import React, { useState, useEffect } from 'react';
+import './AdminDashboard.css';
+import { useCourseContext } from '../context/CourseContext';
 const AdminDashboard = () => {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("Academic");
-  const [imageName, setImageName] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('Academic');
+  const [type, setType] = useState('');
+  const [description, setDescription] = useState('');
+  const [editIndex, setEditIndex] = useState(null);
+  const [courses, setCourses] = useState([]);
 
-  const { courses = [], setCourses } = useCourseContext();
+  // Load courses from localStorage on mount
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem('allCourses')) || [];
+    setCourses(stored);
+  }, []);
 
-  const handleSubmit = async (e) => {
+  // Save to localStorage
+  const saveCourses = (updatedCourses) => {
+    localStorage.setItem('allCourses', JSON.stringify(updatedCourses));
+    setCourses(updatedCourses);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const newCourse = {
       title,
       category,
-      imageName: imageName.replace(/\s+/g, "").toLowerCase(),
+      type: category === 'Skill Development' ? type : '',
+      subject: title,
       description,
     };
 
-    try {
-      const response = await axios.post(
-        "https://edutech-backend-6mkz.onrender.com/api/courses/add",
-        newCourse
-      );
-
-      if (response.data) {
-        setCourses((prev) => [...prev, response.data]);
-        setTitle("");
-        setCategory("Academic");
-        setImageName("");
-        setDescription("");
-        alert("✅ Course added successfully");
-      }
-    } catch (err) {
-      console.error("Error adding course:", err);
-      alert("❌ Failed to add course");
+    let updatedCourses;
+    if (editIndex !== null) {
+      updatedCourses = [...courses];
+      updatedCourses[editIndex] = newCourse;
+      setEditIndex(null);
+    } else {
+      updatedCourses = [...courses, newCourse];
     }
+
+    saveCourses(updatedCourses);
+
+    // Reset form
+    setTitle('');
+    setCategory('Academic');
+    setType('');
+    setDescription('');
   };
 
-  useEffect(() => {
-    axios
-      .get("https://edutech-backend-6mkz.onrender.com/api/courses")
-      .then((res) => {
-        if (Array.isArray(res.data)) {
-          setCourses(res.data);
-        } else {
-          console.warn("Unexpected response:", res.data);
-        }
-      })
-      .catch((err) => console.error("Fetch courses error:", err));
-  }, [setCourses]);
+  const handleEdit = (index) => {
+    const course = courses[index];
+    setTitle(course.title);
+    setCategory(course.category);
+    setType(course.type || '');
+    setDescription(course.description);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    const updatedCourses = courses.filter((_, i) => i !== index);
+    saveCourses(updatedCourses);
+  };
 
   return (
     <div className="admin-container">
-      <h1>📋 Admin Dashboard</h1>
+      <h1>📋 Admin Dashboard - {editIndex !== null ? 'Edit Course' : 'Add Course'}</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Course Title"
-          required
-        />
+        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Course Title" required />
 
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="Academic">Academic</option>
           <option value="Skill Development">Skill Development</option>
         </select>
 
-        <input
-          value={imageName}
-          onChange={(e) => setImageName(e.target.value)}
-          placeholder="Image File Name (e.g., leadershiptraining.jpeg)"
-          required
-        />
+        {category === 'Skill Development' && (
+          <select value={type} onChange={(e) => setType(e.target.value)} required>
+            <option value="">Select Type</option>
+            <option value="Programming Languages">Programming Languages</option>
+            <option value="Professional & Emerging Skills">Professional & Emerging Skills</option>
+          </select>
+        )}
 
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Course Description"
-          rows="3"
           required
         />
 
-        <button type="submit">➕ Add Course</button>
+        <button type="submit">{editIndex !== null ? '✏️ Update Course' : '➕ Add Course'}</button>
       </form>
 
-      <h2>📚 Existing Courses</h2>
+      <h2> Existing Courses</h2>
       {courses.length === 0 ? (
         <p>No courses added yet.</p>
       ) : (
@@ -98,33 +102,22 @@ const AdminDashboard = () => {
             <tr>
               <th>Title</th>
               <th>Category</th>
-              <th>Image</th>
-              <th>Description</th>
+              <th>Type</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {courses.map((course, index) => {
-              const categoryPath =
-                course.category === "Skill Development" ? "skill" : "academic";
-
-              return (
-                <tr key={index}>
-                  <td>{course.title}</td>
-                  <td>{course.category}</td>
-                  <td>
-                    <img
-                      src={`/images/courses/${categoryPath}/${course.imageName}`}
-                      alt={course.title}
-                      width="80"
-                      onError={(e) => {
-                        e.target.src = "/images/fallback.jpg";
-                      }}
-                    />
-                  </td>
-                  <td>{course.description}</td>
-                </tr>
-              );
-            })}
+            {courses.map((course, index) => (
+              <tr key={index}>
+                <td>{course.title}</td>
+                <td>{course.category}</td>
+                <td>{course.type || '-'}</td>
+                <td>
+                  <button onClick={() => handleEdit(index)}> Edit</button>
+                  <button onClick={() => handleDelete(index)}> Delete</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       )}

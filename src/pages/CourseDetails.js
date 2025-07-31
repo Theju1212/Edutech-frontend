@@ -1,4 +1,3 @@
-// src/components/CourseDetails.js
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import YouTube from 'react-youtube';
@@ -48,28 +47,14 @@ const CourseDetails = () => {
     );
   }
 
-  const categoryPath = course.category === "Skill Development" ? "skill" : "academic";
-  const imageSrc = `/images/courses/${categoryPath}/${course.imageName}`;
-
   return (
     <div className="course-detail-container">
       <div className="course-detail-inner">
         <h1>{course.title}</h1>
-        <p className="tag">{course.category}</p>
+        <p className="tag">{course.category}{course.type && ` - ${course.type}`}</p>
         <p className="difficulty">LEVEL: {course.difficulty}</p>
 
         <div className="video-section">
-          <img
-            src={imageSrc}
-            alt={course.title}
-            style={{
-              width: '100%',
-              maxHeight: '300px',
-              objectFit: 'cover',
-              borderRadius: '10px',
-              marginBottom: '20px',
-            }}
-          />
           <YouTube videoId="dQw4w9WgXcQ" opts={videoOptions} onEnd={handleVideoEnd} />
         </div>
 
@@ -93,3 +78,4 @@ const CourseDetails = () => {
 };
 
 export default CourseDetails;
+ 

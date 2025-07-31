@@ -18,7 +18,7 @@ import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/edutech-frontend">
       {/* ✅ Keep Header and Footer inside Router context */}
       <Header />
       <Routes>
