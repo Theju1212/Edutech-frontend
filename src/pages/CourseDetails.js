@@ -4,6 +4,14 @@ import YouTube from 'react-youtube';
 import './CourseDetails.css';
 import { useCourseContext } from '../context/CourseContext';
 
+const imageMap = {
+  "webdevelopment": "webdev.jpg",
+  "pythonbasics": "python.jpg",
+  "datascience": "datasci.jpg",
+  "graphicdesign": "graphic.jpg",
+  // Add more mappings as needed
+};
+
 const CourseDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -55,6 +63,17 @@ const CourseDetails = () => {
         <p className="difficulty">LEVEL: {course.difficulty}</p>
 
         <div className="video-section">
+          <img
+            src={`/images/courses/${course.category.toLowerCase()}/${imageMap[course.title.toLowerCase().replace(/\s/g, "")]}`}
+            alt={course.title}
+            style={{
+              width: '100%',
+              maxHeight: '300px',
+              objectFit: 'cover',
+              borderRadius: '10px',
+              marginBottom: '20px',
+            }}
+          />
           <YouTube videoId="dQw4w9WgXcQ" opts={videoOptions} onEnd={handleVideoEnd} />
         </div>
 

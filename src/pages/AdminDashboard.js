@@ -1,87 +1,79 @@
-import React, { useState } from 'react';
-import './AdminDashboard.css';
-import { useCourseContext } from '../context/CourseContext';
+// src/components/AdminDashboard.js
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./AdminDashboard.css";
+import { useCourseContext } from "../context/CourseContext";
 
 const AdminDashboard = () => {
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('Academic');
-  const [type, setType] = useState('');
-  const [description, setDescription] = useState('');
-  const [editIndex, setEditIndex] = useState(null);
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("Academic");
+  const [imageName, setImageName] = useState("");
+
   const { courses, setCourses } = useCourseContext();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newCourse = {
       title,
       category,
-      type: category === 'Skill Development' ? type : '',
-      subject: title,
-      description,
+      imageName: imageName.replace(/\s+/g, "").toLowerCase(),
     };
 
-    let updatedCourses;
-    if (editIndex !== null) {
-      updatedCourses = [...courses];
-      updatedCourses[editIndex] = newCourse;
-      setEditIndex(null);
-    } else {
-      updatedCourses = [...courses, newCourse];
+    try {
+      const response = await axios.post(
+        "https://edutech-backend-6mkz.onrender.com/api/courses/add",
+        newCourse
+      );
+
+      if (response.data) {
+        setCourses((prev) => [...prev, response.data]);
+        setTitle("");
+        setCategory("Academic");
+        setImageName("");
+        alert("✅ Course added successfully");
+      }
+    } catch (err) {
+      console.error("Error adding course:", err);
+      alert("❌ Failed to add course");
     }
-
-    setCourses(updatedCourses);
-
-    setTitle('');
-    setCategory('Academic');
-    setType('');
-    setDescription('');
   };
 
-  const handleEdit = (index) => {
-    const course = courses[index];
-    setTitle(course.title);
-    setCategory(course.category);
-    setType(course.type || '');
-    setDescription(course.description);
-    setEditIndex(index);
-  };
-
-  const handleDelete = (index) => {
-    const updatedCourses = courses.filter((_, i) => i !== index);
-    setCourses(updatedCourses);
-  };
+  // Optional: Fetch courses again when admin page loads
+  useEffect(() => {
+    axios
+      .get("https://edutech-backend-6mkz.onrender.com/api/courses")
+      .then((res) => setCourses(res.data))
+      .catch((err) => console.error("Fetch courses error:", err));
+  }, [setCourses]);
 
   return (
     <div className="admin-container">
-      <h1>📋 Admin Dashboard - {editIndex !== null ? 'Edit Course' : 'Add Course'}</h1>
+      <h1>📋 Admin Dashboard</h1>
       <form onSubmit={handleSubmit}>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Course Title" required />
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Course Title"
+          required
+        />
 
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="Academic">Academic</option>
           <option value="Skill Development">Skill Development</option>
         </select>
 
-        {category === 'Skill Development' && (
-          <select value={type} onChange={(e) => setType(e.target.value)} required>
-            <option value="">Select Type</option>
-            <option value="Programming Languages">Programming Languages</option>
-            <option value="Professional & Emerging Skills">Professional & Emerging Skills</option>
-          </select>
-        )}
-
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Course Description"
+        <input
+          value={imageName}
+          onChange={(e) => setImageName(e.target.value)}
+          placeholder="Image File Name (e.g., leadershiptraining)"
           required
         />
 
-        <button type="submit">{editIndex !== null ? '✏️ Update Course' : '➕ Add Course'}</button>
+        <button type="submit">➕ Add Course</button>
       </form>
 
-      <h2> Existing Courses</h2>
+      <h2>📚 Existing Courses</h2>
       {courses.length === 0 ? (
         <p>No courses added yet.</p>
       ) : (
@@ -90,8 +82,7 @@ const AdminDashboard = () => {
             <tr>
               <th>Title</th>
               <th>Category</th>
-              <th>Type</th>
-              <th>Actions</th>
+              <th>Image</th>
             </tr>
           </thead>
           <tbody>
@@ -99,10 +90,16 @@ const AdminDashboard = () => {
               <tr key={index}>
                 <td>{course.title}</td>
                 <td>{course.category}</td>
-                <td>{course.type || '-'}</td>
                 <td>
-                  <button onClick={() => handleEdit(index)}>Edit</button>
-                  <button onClick={() => handleDelete(index)}>Delete</button>
+                  <img
+                    src={
+                      course.category === "Skill Development"
+                        ? `/images/courses/skill/${course.imageName}`
+                        : `/images/courses/academic/${course.imageName}`
+                    }
+                    alt={course.title}
+                    width="80"
+                  />
                 </td>
               </tr>
             ))}
