@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './AdminDashboard.css';
+import { useCourseList } from '../context/CourseListContext';
 
 const AdminDashboard = () => {
   const [title, setTitle] = useState('');
@@ -7,19 +8,7 @@ const AdminDashboard = () => {
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
   const [editIndex, setEditIndex] = useState(null);
-  const [courses, setCourses] = useState([]);
-
-  // Load courses from localStorage on mount
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('allCourses')) || [];
-    setCourses(stored);
-  }, []);
-
-  // Save to localStorage
-  const saveCourses = (updatedCourses) => {
-    localStorage.setItem('allCourses', JSON.stringify(updatedCourses));
-    setCourses(updatedCourses);
-  };
+  const { courses, setCourses } = useCourseList();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,9 +30,8 @@ const AdminDashboard = () => {
       updatedCourses = [...courses, newCourse];
     }
 
-    saveCourses(updatedCourses);
+    setCourses(updatedCourses);
 
-    // Reset form
     setTitle('');
     setCategory('Academic');
     setType('');
@@ -61,7 +49,7 @@ const AdminDashboard = () => {
 
   const handleDelete = (index) => {
     const updatedCourses = courses.filter((_, i) => i !== index);
-    saveCourses(updatedCourses);
+    setCourses(updatedCourses);
   };
 
   return (
@@ -113,8 +101,8 @@ const AdminDashboard = () => {
                 <td>{course.category}</td>
                 <td>{course.type || '-'}</td>
                 <td>
-                  <button onClick={() => handleEdit(index)}> Edit</button>
-                  <button onClick={() => handleDelete(index)}> Delete</button>
+                  <button onClick={() => handleEdit(index)}>Edit</button>
+                  <button onClick={() => handleDelete(index)}>Delete</button>
                 </td>
               </tr>
             ))}
