@@ -18,7 +18,8 @@ import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
-    <Router basename="/Edutech_react">
+    <Router basename="/Edutech-frontend">
+
 
       <div className="App">
         <Header />
