@@ -8,8 +8,8 @@ const AdminDashboard = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Academic");
   const [imageName, setImageName] = useState("");
+  const [description, setDescription] = useState("");
 
-  // Safety fallback in case context is not ready
   const { courses = [], setCourses } = useCourseContext();
 
   const handleSubmit = async (e) => {
@@ -19,6 +19,7 @@ const AdminDashboard = () => {
       title,
       category,
       imageName: imageName.replace(/\s+/g, "").toLowerCase(),
+      description,
     };
 
     try {
@@ -32,6 +33,7 @@ const AdminDashboard = () => {
         setTitle("");
         setCategory("Academic");
         setImageName("");
+        setDescription("");
         alert("✅ Course added successfully");
       }
     } catch (err) {
@@ -40,7 +42,6 @@ const AdminDashboard = () => {
     }
   };
 
-  // Fetch courses on mount
   useEffect(() => {
     axios
       .get("https://edutech-backend-6mkz.onrender.com/api/courses")
@@ -77,11 +78,19 @@ const AdminDashboard = () => {
           required
         />
 
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Course Description"
+          rows="3"
+          required
+        />
+
         <button type="submit">➕ Add Course</button>
       </form>
 
       <h2>📚 Existing Courses</h2>
-      {!Array.isArray(courses) || courses.length === 0 ? (
+      {courses.length === 0 ? (
         <p>No courses added yet.</p>
       ) : (
         <table className="course-table">
@@ -90,6 +99,7 @@ const AdminDashboard = () => {
               <th>Title</th>
               <th>Category</th>
               <th>Image</th>
+              <th>Description</th>
             </tr>
           </thead>
           <tbody>
@@ -107,10 +117,11 @@ const AdminDashboard = () => {
                       alt={course.title}
                       width="80"
                       onError={(e) => {
-                        e.target.src = "/images/fallback.jpg"; // Add fallback image in public folder if needed
+                        e.target.src = "/images/fallback.jpg";
                       }}
                     />
                   </td>
+                  <td>{course.description}</td>
                 </tr>
               );
             })}

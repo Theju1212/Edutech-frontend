@@ -1,16 +1,9 @@
+// src/components/CourseDetails.js
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import './CourseDetails.css';
 import { useCourseContext } from '../context/CourseContext';
-
-const imageMap = {
-  "webdevelopment": "webdev.jpg",
-  "pythonbasics": "python.jpg",
-  "datascience": "datasci.jpg",
-  "graphicdesign": "graphic.jpg",
-  // Add more mappings as needed
-};
 
 const CourseDetails = () => {
   const { state } = useLocation();
@@ -55,16 +48,19 @@ const CourseDetails = () => {
     );
   }
 
+  const categoryPath = course.category === "Skill Development" ? "skill" : "academic";
+  const imageSrc = `/images/courses/${categoryPath}/${course.imageName}`;
+
   return (
     <div className="course-detail-container">
       <div className="course-detail-inner">
         <h1>{course.title}</h1>
-        <p className="tag">{course.category}{course.type && ` - ${course.type}`}</p>
+        <p className="tag">{course.category}</p>
         <p className="difficulty">LEVEL: {course.difficulty}</p>
 
         <div className="video-section">
           <img
-            src={`/images/courses/${course.category.toLowerCase()}/${imageMap[course.title.toLowerCase().replace(/\s/g, "")]}`}
+            src={imageSrc}
             alt={course.title}
             style={{
               width: '100%',
