@@ -9,7 +9,8 @@ const AdminDashboard = () => {
   const [category, setCategory] = useState("Academic");
   const [imageName, setImageName] = useState("");
 
-  const { courses, setCourses } = useCourseContext();
+  // Safety fallback in case context is not ready
+  const { courses = [], setCourses } = useCourseContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,11 +40,17 @@ const AdminDashboard = () => {
     }
   };
 
-  // Optional: Fetch courses again when admin page loads
+  // Fetch courses on mount
   useEffect(() => {
     axios
       .get("https://edutech-backend-6mkz.onrender.com/api/courses")
-      .then((res) => setCourses(res.data))
+      .then((res) => {
+        if (Array.isArray(res.data)) {
+          setCourses(res.data);
+        } else {
+          console.warn("Unexpected response:", res.data);
+        }
+      })
       .catch((err) => console.error("Fetch courses error:", err));
   }, [setCourses]);
 
@@ -66,7 +73,7 @@ const AdminDashboard = () => {
         <input
           value={imageName}
           onChange={(e) => setImageName(e.target.value)}
-          placeholder="Image File Name (e.g., leadershiptraining)"
+          placeholder="Image File Name (e.g., leadershiptraining.jpeg)"
           required
         />
 
@@ -74,7 +81,7 @@ const AdminDashboard = () => {
       </form>
 
       <h2>📚 Existing Courses</h2>
-      {courses.length === 0 ? (
+      {!Array.isArray(courses) || courses.length === 0 ? (
         <p>No courses added yet.</p>
       ) : (
         <table className="course-table">
@@ -86,23 +93,27 @@ const AdminDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {courses.map((course, index) => (
-              <tr key={index}>
-                <td>{course.title}</td>
-                <td>{course.category}</td>
-                <td>
-                  <img
-                    src={
-                      course.category === "Skill Development"
-                        ? `/images/courses/skill/${course.imageName}`
-                        : `/images/courses/academic/${course.imageName}`
-                    }
-                    alt={course.title}
-                    width="80"
-                  />
-                </td>
-              </tr>
-            ))}
+            {courses.map((course, index) => {
+              const categoryPath =
+                course.category === "Skill Development" ? "skill" : "academic";
+
+              return (
+                <tr key={index}>
+                  <td>{course.title}</td>
+                  <td>{course.category}</td>
+                  <td>
+                    <img
+                      src={`/images/courses/${categoryPath}/${course.imageName}`}
+                      alt={course.title}
+                      width="80"
+                      onError={(e) => {
+                        e.target.src = "/images/fallback.jpg"; // Add fallback image in public folder if needed
+                      }}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}
