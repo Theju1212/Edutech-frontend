@@ -6,6 +6,8 @@
   color: white;
   min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 .dashboard-wrapper h1 {
