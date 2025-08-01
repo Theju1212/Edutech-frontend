@@ -117,6 +117,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* Existing links styling */
 .course-card a {
   display: inline-block;
   margin-top: auto;
@@ -132,41 +133,70 @@ body {
   background-color: #0da78e;
 }
 
+/* NEW: View Course button styling (match the look of links) */
+.course-card button {
+  margin-top: auto;
+  background-color: #14b89f;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.course-card button:hover {
+  background-color: #0da78e;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .courses-container h1 {
     font-size: 2rem;
   }
+
   .filters select {
     font-size: 0.95rem;
     min-width: 140px;
   }
+
   .course-card {
     padding: 15px;
   }
+
   .course-card h3 {
     font-size: 1.1rem;
   }
+
   .course-card p {
     font-size: 0.9rem;
   }
 }
+
 @media (max-width: 480px) {
   .courses-container h1 {
     font-size: 1.7rem;
   }
+
   .filters {
     flex-direction: column;
     align-items: center;
   }
+
   .filters select {
     width: 100%;
     max-width: 300px;
   }
+
   .course-card {
     padding: 12px;
   }
-  .course-card a {
+
+  .course-card a,
+  .course-card button {   /* Make both take full width on mobile */
     width: 100%;
     padding: 10px;
   }
