@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import getCourseImageSrc from '../utils/getCourseImageSrc';
 import './Courses.css';
 
@@ -17,6 +17,7 @@ const Courses = () => {
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedClass, setSelectedClass] = useState('');
   const [allCourses, setAllCourses] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedCourses = JSON.parse(localStorage.getItem('allCourses')) || [];
@@ -27,13 +28,10 @@ const Courses = () => {
     const categoryMatch = selectedCategory ? course.category === selectedCategory : true;
     const subjectMatch = selectedSubject ? course.subject === selectedSubject : true;
 
-    // Apply filters ONLY if both class and category are selected
     if (selectedClass && selectedCategory) {
       return categoryMatch && subjectMatch;
     }
 
-    // If class selected but no category, show all
-    // If nothing selected, show all
     return true;
   });
 
@@ -81,17 +79,11 @@ const Courses = () => {
               <p className="tag">{course.category}{course.type ? ` - ${course.type}` : ''}</p>
               {selectedClass && <p className="difficulty">Level: {difficulty}</p>}
               <p>{course.description}</p>
-              <Link
-                to="/course-details"
-                state={{
-                  course: {
-                    ...course,
-                    difficulty,
-                  },
-                }}
+              <button
+                onClick={() => navigate(`/course/${course._id}`)}
               >
                 View Course
-              </Link>
+              </button>
             </div>
           );
         })}
