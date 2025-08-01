@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './AdminDashboard.css';
-import { useCourseContext } from '../context/CourseContext';
+import axios from 'axios';
+
+const API_URL = 'https://edutech-backend-6mkz.onrender.com/api/courses';
+
 const AdminDashboard = () => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Academic');
@@ -8,22 +11,16 @@ const AdminDashboard = () => {
   const [description, setDescription] = useState('');
   const [editIndex, setEditIndex] = useState(null);
   const [courses, setCourses] = useState([]);
+  const [editingId, setEditingId] = useState(null);
 
-  // Load courses from localStorage on mount
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('allCourses')) || [];
-    setCourses(stored);
+    axios.get(API_URL)
+      .then(res => setCourses(res.data))
+      .catch(err => console.error('Fetch failed', err));
   }, []);
 
-  // Save to localStorage
-  const saveCourses = (updatedCourses) => {
-    localStorage.setItem('allCourses', JSON.stringify(updatedCourses));
-    setCourses(updatedCourses);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     const newCourse = {
       title,
       category,
@@ -32,22 +29,22 @@ const AdminDashboard = () => {
       description,
     };
 
-    let updatedCourses;
-    if (editIndex !== null) {
-      updatedCourses = [...courses];
-      updatedCourses[editIndex] = newCourse;
-      setEditIndex(null);
+    if (editingId) {
+      const res = await axios.put(`${API_URL}/${editingId}`, newCourse);
+      const updatedCourses = courses.map(c => c._id === editingId ? res.data : c);
+      setCourses(updatedCourses);
+      setEditingId(null);
     } else {
-      updatedCourses = [...courses, newCourse];
+      const res = await axios.post(API_URL, newCourse);
+      setCourses([...courses, res.data]);
     }
-
-    saveCourses(updatedCourses);
 
     // Reset form
     setTitle('');
     setCategory('Academic');
     setType('');
     setDescription('');
+    setEditIndex(null);
   };
 
   const handleEdit = (index) => {
@@ -57,11 +54,14 @@ const AdminDashboard = () => {
     setType(course.type || '');
     setDescription(course.description);
     setEditIndex(index);
+    setEditingId(course._id);
   };
 
-  const handleDelete = (index) => {
+  const handleDelete = async (index) => {
+    const id = courses[index]._id;
+    await axios.delete(`${API_URL}/${id}`);
     const updatedCourses = courses.filter((_, i) => i !== index);
-    saveCourses(updatedCourses);
+    setCourses(updatedCourses);
   };
 
   return (
