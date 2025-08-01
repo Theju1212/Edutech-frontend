@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import getCourseImageSrc from '../utils/getCourseImageSrc';
 import './Courses.css';
 
@@ -20,18 +21,18 @@ const Courses = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedCourses = JSON.parse(localStorage.getItem('allCourses')) || [];
-    setAllCourses(savedCourses);
+    // ✅ Fetch from backend instead of localStorage
+    axios.get('https://edutech-backend-6mkz.onrender.com/api/courses')
+      .then(res => setAllCourses(res.data))
+      .catch(err => console.error('Failed to fetch courses:', err));
   }, []);
 
   const filteredCourses = allCourses.filter((course) => {
     const categoryMatch = selectedCategory ? course.category === selectedCategory : true;
     const subjectMatch = selectedSubject ? course.subject === selectedSubject : true;
-
     if (selectedClass && selectedCategory) {
       return categoryMatch && subjectMatch;
     }
-
     return true;
   });
 
@@ -79,9 +80,7 @@ const Courses = () => {
               <p className="tag">{course.category}{course.type ? ` - ${course.type}` : ''}</p>
               {selectedClass && <p className="difficulty">Level: {difficulty}</p>}
               <p>{course.description}</p>
-              <button
-                onClick={() => navigate(`/course/${course._id}`)}
-              >
+              <button onClick={() => navigate(`/course/${course._id}`)}>
                 View Course
               </button>
             </div>
