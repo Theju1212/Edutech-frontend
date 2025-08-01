@@ -1,13 +1,12 @@
-/* src/pages/Dashboard.css */
-
+/* Dashboard.css */
 .dashboard-wrapper {
   padding: 2rem 1rem;
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   color: white;
-  min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;
+  flex: 1 0 auto;
 }
 
 .dashboard-wrapper h1 {
@@ -32,6 +31,7 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   justify-items: center;
+  flex: 1 0 auto;
 }
 
 .dashboard-card {
@@ -120,16 +120,13 @@
   background: #4caf50;
   color: white;
 }
-
 .download-btn:hover {
   background: #16a34a;
 }
-
 .quiz-btn {
   background: linear-gradient(to right, #7f5af0, #2cb67d);
   color: white;
 }
-
 .quiz-btn:hover {
   opacity: 0.9;
 }
@@ -141,32 +138,26 @@ p.empty-msg {
   grid-column: 1 / -1;
 }
 
-/* 📱 Mobile Responsive Adjustments */
+/* Responsive */
 @media (max-width: 480px) {
   .dashboard-wrapper {
     padding: 1.2rem 0.8rem;
   }
-
   .dashboard-wrapper h1 {
     font-size: 2rem;
   }
-
   .section h2 {
     font-size: 1.5rem;
   }
-
   .dashboard-card {
     padding: 1rem;
   }
-
   .dashboard-card h3 {
     font-size: 1.2rem;
   }
-
   .dashboard-card p {
     font-size: 0.9rem;
   }
-
   .download-btn,
   .quiz-btn {
     font-size: 0.85rem;
