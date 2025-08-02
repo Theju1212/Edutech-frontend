@@ -33,6 +33,7 @@ const AdminLogin = () => {
           onChange={(e) => setEmail(e.target.value)}
         /><br />
         <input
+         
           placeholder="Secret Key"
           value={key}
           onChange={(e) => setKey(e.target.value)}
