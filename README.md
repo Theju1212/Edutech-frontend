@@ -1,70 +1,179 @@
-# Getting Started with Create React App
+# 🎓 MERN Edutech Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-featured Edutech learning platform built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js) to provide academic and skill-based courses for students from Classes 6–12. It also includes role-based login (Admin/User), certificate generation, and a quiz module.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+🌐 Live Demo 
+👉 https://theju1212.github.io/Edutech-frontend/
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Features Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 🔐 **User Authentication**
+  - Login / Register / Forgot Password functionality
+  - Secure role-based routing for Users and Admins
 
-### `npm test`
+- 🧒 **Student Interface**
+  - Browse academic and skill development courses
+  - View course difficulty based on class (Easy/Medium/Hard)
+  - Enroll in courses
+  - Watch course videos
+  - Attempt quizzes after completion
+  - Get downloadable certificates
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 👨‍🏫 **Admin Interface**
+  - Add/Edit/Delete courses
+  - Manage content dynamically
+  - Categorize courses by subject and class
 
-### `npm run build`
+- 📜 **Certificate Generation**
+  - Beautiful downloadable certificate after quiz success
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 📧 **Contact Us**
+  - User can reach out for any queries
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## 🔄 Application Flow 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. Landing / About Page
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Entry point with navigation to:
+  - About
+  - Admin Login
+  - Contact
+  - User Login/Register
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![About Page](client/screenshots/about.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### 2. User Registration / Login
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Users can register with basic details
+- Forgot password functionality with validation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Register](client/screenshots/register.png)
+![User Login](client/screenshots/userlogin.png)
+![Forgot Password](client/screenshots/forgotpassword.png)
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 3. Home Page (User)
 
-### Analyzing the Bundle Size
+- Displays major categories:
+  - Academic Courses
+  - Skill Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![Home](client/screenshots/home.png)
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 4. Courses Page
 
-### Advanced Configuration
+- Shows list of available courses by category
+- Difficulty level changes based on class:
+  - Class 6–7: Easy
+  - Class 8–9: Medium
+  - Class 10–12: Hard
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![Courses](client/screenshots/courses.png)
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 5. Course Details Page
 
-### `npm run build` fails to minify
+- Contains dummy video for preview
+- Enroll button to start learning
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Course Details](client/screenshots/course-details.png)
+
+---
+
+### 6. Quiz & Certificate
+
+- After course completion, quiz becomes available
+- Successful quiz completion enables certificate download
+
+![Quiz](client/screenshots/quiz-page.png)
+![Certificate](client/screenshots/certificate.png)
+
+---
+
+### 7. User Dashboard
+
+- Shows enrolled and completed courses
+- Allows retaking quiz and viewing certificates
+
+![User Dashboard](client/screenshots/user-dashboard.png)
+![User Dashboard 2](client/screenshots/user-dashboard2.png)
+
+---
+
+### 8. Admin Panel
+
+- Admin can:
+  - Add new courses
+  - Edit/Delete existing ones
+
+![Admin Login](client/screenshots/admin-login.png)
+![Admin Dashboard](client/screenshots/admin-dashboard.png)
+
+---
+
+### 9. Contact Page
+
+- Simple contact form for reaching out
+
+![Contact](client/screenshots/contact.png)
+
+---
+
+## 🛠️ Tech Stack
+
+| Frontend        | Backend        | Database   | Other Tools       |
+|-----------------|----------------|------------|-------------------|
+| React.js        | Node.js        | MongoDB    | HTML2PDF.js       |
+| React Router    | Express.js     | Mongoose   | LocalStorage API  |
+| Tailwind CSS    | Axios          |            | Git, GitHub       |
+
+---
+
+## 📜 How to Run the Project Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/mern-edutech.git
+cd mern-edutech
+
+# Install backend dependencies
+cd server
+npm install
+
+# Install frontend dependencies
+cd ../client
+npm install
+
+# Run backend
+npm run server
+
+# Run frontend
+npm start
+
+
+📌 Future Enhancements
+
+📱 Mobile responsive UI
+
+📊 Quiz analytics for users
+
+🙋‍♀️ Author
+Velvaluri Thejaswini
+
+
+
+
+
+
