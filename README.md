@@ -46,7 +46,7 @@ A full-featured Edutech learning platform built using the **MERN stack** (MongoD
   - Contact
   - User Login/Register
 
-![About Page](./client/screenshots/about.png)
+![About Page](./screenshots/about.png)
 
 
 ---
@@ -56,9 +56,9 @@ A full-featured Edutech learning platform built using the **MERN stack** (MongoD
 - Users can register with basic details
 - Forgot password functionality with validation
 
-![Register](./client/screenshots/register.png)
-![User Login](./client/screenshots/userlogin.png)
-![Forgot Password](./client/screenshots/forgotpassword.png)
+![Register](./screenshots/register.png)
+![User Login](./screenshots/userlogin.png)
+![Forgot Password](./screenshots/forgotpassword.png)
 
 ---
 
@@ -68,7 +68,7 @@ A full-featured Edutech learning platform built using the **MERN stack** (MongoD
   - Academic Courses
   - Skill Development
 
-![Home](./client/screenshots/home.png)
+![Home](./screenshots/home.png)
 
 ---
 
@@ -80,7 +80,7 @@ A full-featured Edutech learning platform built using the **MERN stack** (MongoD
   - Class 8–9: Medium
   - Class 10–12: Hard
 
-![Courses](./client/screenshots/courses.png)
+![Courses](./screenshots/courses.png)
 
 ---
 
@@ -89,7 +89,7 @@ A full-featured Edutech learning platform built using the **MERN stack** (MongoD
 - Contains dummy video for preview
 - Enroll button to start learning
 
-![Course Details](./client/screenshots/course-details.png)
+![Course Details](./screenshots/course-details.png)
 
 ---
 
@@ -98,8 +98,8 @@ A full-featured Edutech learning platform built using the **MERN stack** (MongoD
 - After course completion, quiz becomes available
 - Successful quiz completion enables certificate download
 
-![Quiz](./client/screenshots/quiz-page.png)
-![Certificate](./client/screenshots/certificate.png)
+![Quiz](./screenshots/quiz-page.png)
+![Certificate](./screenshots/certificate.png)
 
 ---
 
@@ -108,8 +108,8 @@ A full-featured Edutech learning platform built using the **MERN stack** (MongoD
 - Shows enrolled and completed courses
 - Allows retaking quiz and viewing certificates
 
-![User Dashboard](./client/screenshots/user-dashboard.png)
-![User Dashboard 2](./client/screenshots/user-dashboard2.png)
+![User Dashboard](./screenshots/user-dashboard.png)
+![User Dashboard 2](.t/screenshots/user-dashboard2.png)
 
 ---
 
@@ -119,8 +119,8 @@ A full-featured Edutech learning platform built using the **MERN stack** (MongoD
   - Add new courses
   - Edit/Delete existing ones
 
-![Admin Login](./client/screenshots/admin-login.png)
-![Admin Dashboard](./client/screenshots/admin-dashboard.png)
+![Admin Login](./screenshots/admin-login.png)
+![Admin Dashboard](./screenshots/admin-dashboard.png)
 
 ---
 
@@ -128,7 +128,7 @@ A full-featured Edutech learning platform built using the **MERN stack** (MongoD
 
 - Simple contact form for reaching out
 
-![Contact](./client/screenshots/contact.png)
+![Contact](./screenshots/contact.png)
 
 ---
 
