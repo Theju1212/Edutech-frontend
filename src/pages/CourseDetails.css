@@ -1,0 +1,115 @@
+/* CourseDetails.css */
+/* Remove min-height from .page-wrapper, only use flex: 1 for growing content. */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+/* Center main content */
+.course-detail-container {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.course-detail-inner {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.tag,
+.difficulty {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.video-section {
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.description {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  padding: 0 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.actions button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.actions button:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .course-detail-container {
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  .tag,
+  .difficulty {
+    font-size: 1rem;
+  }
+  .description {
+    font-size: 1rem;
+    padding: 0;
+  }
+  .actions button {
+    width: 100%;
+    max-width: 300px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+  .description {
+    font-size: 0.95rem;
+  }
+  .actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .video-section iframe {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16/9;
+  }
+}

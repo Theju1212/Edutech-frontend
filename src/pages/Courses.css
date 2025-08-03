@@ -1,0 +1,203 @@
+/* Courses.css */
+/* Remove min-height from .courses-container, let flex parent handle height */
+.courses-container {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.courses-container h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.filters select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  background-color: #ffffff;
+  color: #0f2027;
+  min-width: 180px;
+}
+
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  justify-content: center;
+  align-items: stretch;
+  flex: 1 0 auto;
+}
+
+.course-card {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid #ffffff33;
+  border-radius: 15px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px #66ffcc;
+}
+
+.course-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #0e1a25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.course-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 255, 204, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.course-image img:hover {
+  transform: scale(1.03);
+}
+
+.course-card h3 {
+  margin: 10px 0 5px;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.course-card .tag {
+  font-size: 0.9rem;
+  color: #b0ffeb;
+  margin: 5px 0;
+}
+
+.course-card .difficulty {
+  font-weight: bold;
+  margin: 5px 0;
+  color: #ffd700;
+}
+
+.course-card p {
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  margin-bottom: 10px;
+}
+
+/* Existing links styling */
+.course-card a {
+  display: inline-block;
+  margin-top: auto;
+  background-color: #14b89f;
+  padding: 10px 16px;
+  border-radius: 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.course-card a:hover {
+  background-color: #0da78e;
+}
+
+/* NEW: View Course button styling (match the look of links) */
+.course-card button {
+  margin-top: auto;
+  background-color: #14b89f;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.course-card button:hover {
+  background-color: #0da78e;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .courses-container h1 {
+    font-size: 2rem;
+  }
+
+  .filters select {
+    font-size: 0.95rem;
+    min-width: 140px;
+  }
+
+  .course-card {
+    padding: 15px;
+  }
+
+  .course-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .course-card p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .courses-container h1 {
+    font-size: 1.7rem;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filters select {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .course-card {
+    padding: 12px;
+  }
+
+  .course-card a,
+  .course-card button {   /* Make both take full width on mobile */
+    width: 100%;
+    padding: 10px;
+  }
+}
